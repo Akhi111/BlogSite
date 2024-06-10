@@ -1,6 +1,7 @@
 import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import CallToAction from "../components/CallToAction";
 
 const PostPage = () => {
   const { postSlug } = useParams();
@@ -69,6 +70,9 @@ const PostPage = () => {
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
       {/*dangerouslySetInnerHTML is used to set auto headers for post content and post-content is custom class used for styling in index.css. */}
+      <div className=" max-w-4xl mx-auto w-full">
+        <CallToAction />
+      </div>
     </main>
   );
 };

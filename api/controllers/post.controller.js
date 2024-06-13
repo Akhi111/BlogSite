@@ -90,7 +90,7 @@ export const updatepost = async (req, res, next) => {
     return next(errorHandler(403, "You are not allowed to update this post"));
   }
   try {
-    const updatePost = await Post.findByIdAndUpdate(
+    const updatedPost = await Post.findByIdAndUpdate(
       req.params.postId,
       {
         $set: {
@@ -102,7 +102,7 @@ export const updatepost = async (req, res, next) => {
       },
       { new: true } // new: true method to get a new results.
     );
-    res.status(200).json(updatePost);
+    res.status(200).json(updatedPost);
   } catch (error) {
     next(error);
   }

@@ -30,7 +30,7 @@ export const getposts = async (req, res, next) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9; //This will show in search results by 3-3-3 rows format.
-    const sortDirection = req.query.order === "asc" ? 1 : -1; //when get req MongoDB shows 1 as ascending and -1 as descending.
+    const sortDirection = req.query.order === 'asc' ? 1 : -1; //when get req MongoDB shows 1 as ascending and -1 as descending.
     const posts = await Post.find({
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.category && { category: req.query.category }),
@@ -39,8 +39,8 @@ export const getposts = async (req, res, next) => {
       //$or: This allow us to search between two places. eg.Title and Content.
       ...(req.query.searchTerm && {
         $or: [
-          { title: { $regex: req.query.searchTerm, $option: "i" } }, //$regex this method is going to search inside the title and use options i for lower and upper case ignore.
-          { content: { $regex: req.query.searchTerm, $option: "i" } },
+          { title: { $regex: req.query.searchTerm, $options: 'i' } }, //$regex this method is going to search inside the title and use options i for lower and upper case ignore.
+          { content: { $regex: req.query.searchTerm, $options: 'i' } },
         ],
       }),
     })
